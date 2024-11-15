@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-do App</title>
+</head>
+<body>
+<h1> To-do App</h1>
+
+
+
+
+<ul>
+        {% for task in tasks %}
+            <li>
+    <strong>ID:</strong> {{ task.id }}<br>
+    <strong>Description:</strong> {{ task.description }}<br>
+    <strong>Category:</strong> {{ task.category }}<br>
+   <strong>Status:</strong> {% if task.completed %} Done {% else %} Pending {% endif %}
+
+</li>
+
+
+        {% endfor %}
+
+
+    </ul><p>
+</body>
+</html>
