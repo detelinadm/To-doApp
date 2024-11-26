@@ -46,6 +46,23 @@ def get_tasks_id(task_id):
     if task is None:
         return jsonify({"error": "Task not found"}), 404
     return jsonify(task)
+    
+@app.route("/tasks/categories", methods=["GET"])
+def get_categories():
+    tasks = load_tasks()
+    category = {task['category'] for task in tasks if 'category' in task}
+    if not category:
+        return jsonify({"error": "No categories found"}), 404
+    return jsonify({"categories": list(category)}), 200
+
+
+@app.route("/tasks/categories/<category_name>", methods=["GET"])
+def get_categories_by_name(category_name):
+    tasks = load_tasks()
+    category = [category for category in tasks if category['category'] == category_name]
+    if category is None:
+        return jsonify({"error": "Category not found"}), 404
+    return jsonify(category)
 
 
 @app.route("/tasks/<int:task_id>", methods=["DELETE"])
